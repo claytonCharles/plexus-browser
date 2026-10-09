@@ -1,0 +1,66 @@
+{
+  "name": "plexus-browser",
+  "description": "Navegador desktop simples",
+  "author": "Clayton Charles",
+  "license": "MIT",
+  "private": true,
+  "version": "0.0.0",
+  "keywords": [
+    "browser"
+  ],
+  "type": "module",
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "dev:renderer": "vite",
+    "dev:electron": "electron .",
+    "build:renderer": "tsc -b && vite build",
+    "build:electron": "tsc --project src/electron/tsconfig.json",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "package:portable": "bun run build:renderer && bun run build:electron && electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.plexus.browser",
+    "productName": "Plexus Browser",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "public/**/*"
+    ]
+  },
+  "win": {
+    "executableName": "Plexus Browser",
+    "legalTrademarks": "Plexus Browser",
+    "target": [
+      {
+        "target": "portable",
+        "arch": [
+          "x64"
+        ]
+      },
+      {
+        "target": "nsis",
+        "arch": [
+          "x64"
+        ]
+      }
+    ]
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3",
+    "oxlint": "^1.81.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  }
+}
